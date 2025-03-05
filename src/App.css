@@ -1,0 +1,56 @@
+:root {
+	background-color: lightskyblue;
+	text-align: center;
+	color: indigo;
+	font-weight: bold;
+	font-size: 200%;
+}
+.body {
+	background-color: #e9967a;
+	text-align: center;
+}
+
+.button {
+	border-radius: 8px;
+	border: 1px solid transparent;
+	font-size: 60%;
+	font-weight: 500;
+	font-family: inherit;
+	background-color: rgb(127, 73, 228);
+	border: 1px solid rgb(12, 12, 12);
+	cursor: pointer;
+	margin: 1%;
+}
+.button:active {
+	background-color: blue;
+	border: 3px solid rgb(12, 12, 12);
+}
+
+.input {
+	margin: 1%;
+}
+.error {
+	color: red;
+	font-size: 60%;
+}
+
+.loader {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 25px;
+	height: 25px;
+	border: 5 px solid indigo;
+	border-radius: 50%;
+	border-left-color: transparent;
+	animation: loader 1s infinite;
+}
+@keyframes loader {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
