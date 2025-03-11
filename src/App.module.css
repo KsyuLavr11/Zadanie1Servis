@@ -1,0 +1,154 @@
+.body {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+}
+.text {
+	text-align: left;
+	font-size: 60%;
+	background-color: rgb(225, 248, 240);
+	border: 1px solid rgb(33, 24, 117);
+}
+
+.button {
+	float: left;
+	margin-right: 5px;
+	border-radius: 4px;
+	border: 1px solid transparent;
+	font-size: 50%;
+	font-weight: 500;
+	font-family: inherit;
+	background-color: rgb(108, 130, 230);
+	border: 1px solid rgb(33, 24, 117);
+	cursor: pointer;
+	margin: 1%;
+}
+.button:active {
+	background-color: blue;
+	border: 3px solid rgb(33, 24, 117);
+}
+.sort-button {
+	float: left;
+	margin-right: 5px;
+	border-radius: 4px;
+	border: 1px solid transparent;
+	font-size: 50%;
+	font-weight: 500;
+	font-family: inherit;
+	background-color: rgb(108, 130, 230);
+	border: 1px solid rgb(33, 24, 117);
+	cursor: pointer;
+	margin: 1% auto;
+	width: 300px;
+}
+.sort-button:active {
+	background-color: rgb(34, 189, 181);
+	border: 3px solid rgb(33, 24, 117);
+}
+.button-todos {
+	border-radius: 4px;
+	border: 1px solid transparent;
+	font-size: 60%;
+	font-weight: 500;
+	font-family: inherit;
+	background-color: rgb(247, 248, 151);
+	border: 1px solid rgb(33, 24, 117);
+	cursor: pointer;
+	margin: 0.5% auto;
+	width: 150px;
+	float: right;
+}
+.button-todos:active {
+	background-color: rgb(224, 248, 5);
+	border: 3px solid rgb(33, 24, 117);
+}
+.button-todos-save {
+	border-radius: 4px;
+	border: 1px solid transparent;
+	font-size: 60%;
+	font-weight: 500;
+	font-family: inherit;
+	background-color: rgb(247, 248, 151);
+	border: 1px solid rgb(33, 24, 117);
+	cursor: pointer;
+	margin: 0.5% auto;
+	width: 150px;
+	float: right;
+}
+.button-todos-save:active {
+	background-color: rgb(224, 248, 5);
+	border: 3px solid rgb(33, 24, 117);
+}
+.button-todos-cancel {
+	border-radius: 4px;
+	border: 1px solid transparent;
+	font-size: 60%;
+	font-weight: 500;
+	font-family: inherit;
+	background-color: rgb(245, 159, 159);
+	border: 1px solid rgb(33, 24, 117);
+	cursor: pointer;
+	margin: 0.5% auto;
+	width: 150px;
+	float: right;
+}
+.button-todos-cancel:active {
+	background-color: rgb(240, 11, 11);
+	border: 3px solid rgb(33, 24, 117);
+}
+
+.button-todos-delete {
+	border-radius: 4px;
+	border: 1px solid transparent;
+	font-size: 60%;
+	font-weight: 500;
+	font-family: inherit;
+	background-color: rgb(245, 159, 159);
+	border: 1px solid rgb(33, 24, 117);
+	cursor: pointer;
+	margin: 0.5% auto;
+	width: 150px;
+	float: right;
+}
+.button-todos-delete:active {
+	background-color: rgb(240, 11, 11);
+	border: 3px solid rgb(33, 24, 117);
+}
+
+.input {
+	float: left;
+	margin-right: 5px;
+	display: inline-block;
+	margin-right: 5px;
+	width: 30%;
+	padding: 8px;
+	margin-bottom: 10px;
+	border-radius: 4px;
+	border: 1px solid rgb(33, 24, 117);
+	margin: 0.5% auto;
+}
+.error {
+	color: red;
+	font-size: 60%;
+}
+
+.loader {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 25px;
+	height: 25px;
+	border: 5 px solid indigo;
+	border-radius: 50%;
+	border-left-color: transparent;
+	animation: loader 1s infinite;
+}
+@keyframes loader {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
