@@ -5,3 +5,9 @@
 	font-weight: bold;
 	font-size: 200%;
 }
+.app {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
