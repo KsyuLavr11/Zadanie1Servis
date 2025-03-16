@@ -1,104 +1,66 @@
 import { useState } from 'react';
 import styles from '../../App.module.css';
 
-export const TodoItemEdition = ({
-	updateTodo,
-	deleteTodo,
-	setTodos,
-	isLoading,
-	todos,
-	isDeletingTodo,
-	handlerIsDeleteTodo,
-}) => {
-	const { isUpdating, setIsUpdating } = useState('');
-	const [editingTodoId, setEditingTodoId] = useState(null); //ID редактируемого дела
-	const [editedTitle, setEditedTitle] = useState(''); //отредактированный заголовок дела
+export const TodoItemEdition = ({ updateTodo, todo, handlerIsDeleteTodo }) => {
+	const [isEditing, seIsEditing] = useState(false);
+	const [editTitle, setEditTitle] = useState(todo.title);
+
+	const handleStartEdit = () => {
+		seIsEditing(true);
+	};
 
 	const handleCancelEdit = () => {
-		setEditingTodoId(null);
-		setEditedTitle('');
+		seIsEditing(false);
+		setEditTitle(todo.title);
 	};
 
-	const handleSaveEdit = (id) => {
-		updateTodo(id, editedTitle)
-			.then(() => {
-				setEditingTodoId(null);
-			})
-			.catch((error) => {
-				console.log('error', error);
-			})
-			.finally(() => {
-				setEditedTitle('');
-			});
+	const handleSaveEdit = () => {
+		updateTodo(todo.id, editTitle);
+		setEditTitle(false);
 	};
 
-	const handleStartEdit = (todo) => {
-		setEditingTodoId(todo.id);
-		setEditedTitle(todo.title);
-	};
-
-	const handlerIsDeleteClick = () => {
-		handlerIsDeleteTodo(todos.id);
+	const handleDelete = () => {
+		handlerIsDeleteTodo(todo.id);
 	};
 
 	return (
-		<>
-			{!isLoading && (
-				<div>
-					{todos.map(({ id, title }) => (
-						<ul className={styles['todo-list']} key={id}>
-							<li>
-								{editingTodoId === id ? (
-									<>
-										<input
-											className={styles.input}
-											type="text"
-											value={editedTitle}
-											onChange={(e) =>
-												setEditedTitle(e.target.value)
-											}
-										/>
-										<button
-											className={styles['button-todos-cancel']}
-											onClick={handleCancelEdit}
-										>
-											Отменить
-										</button>
+		<li>
+			{isEditing ? (
+				<>
+					<input
+						className={styles.input}
+						type="text"
+						value={editTitle}
+						onChange={(e) => setEditTitle(e.target.value)}
+					/>
+					<button
+						className={styles['button-todos-cancel']}
+						onClick={handleCancelEdit}
+					>
+						Отменить
+					</button>
 
-										<button
-											className={styles['button-todos-save']}
-											disabled={isUpdating}
-											onClick={() => handleSaveEdit(id)}
-										>
-											Сохранить
-										</button>
-									</>
-								) : (
-									<>
-										{title}
+					<button
+						className={styles['button-todos-save']}
+						onClick={() => handleSaveEdit(todo.id)}
+					>
+						Сохранить
+					</button>
+				</>
+			) : (
+				<>
+					<button
+						onClick={handleDelete}
+						className={styles['button-todos-delete']}
+					>
+						Удалить дело
+					</button>
 
-										<button
-											disabled={isDeletingTodo}
-											onClick={handlerIsDeleteClick}
-											className={styles['button-todos-delete']}
-										>
-											Удалить дело
-										</button>
-
-										<button
-											disabled={isUpdating}
-											onClick={() => handleStartEdit({ id, title })}
-											className={styles['button-todos']}
-										>
-											Изменить дело
-										</button>
-									</>
-								)}
-							</li>
-						</ul>
-					))}
-				</div>
+					<button onClick={handleStartEdit} className={styles['button-todos']}>
+						Изменить дело
+					</button>
+				</>
 			)}
-		</>
+		</li>
 	);
 };

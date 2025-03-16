@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { todosAPI } from '../api/todosAPI';
 
-export const useTodos = (initialState = []) => {
-	const [todos, setTodos] = useState(initialState);
+export const useTodos = () => {
+	const [todos, setTodos] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState(null);
 
@@ -10,9 +10,11 @@ export const useTodos = (initialState = []) => {
 		setIsLoading(true);
 		try {
 			const data = await todosAPI.readALL();
+			console.log('data', data);
 			setTodos(data);
 		} catch (error) {
 			setError(error);
+			console.log('Ошибка загрузки данных', error);
 		} finally {
 			setIsLoading(false);
 		}
@@ -22,7 +24,7 @@ export const useTodos = (initialState = []) => {
 		setIsLoading(true);
 		try {
 			const createTodos = await todosAPI.create(todo);
-			setTodos([...todos, createTodos]);
+			setTodos((prevTodos) => [...prevTodos, createTodos]);
 		} catch (error) {
 			setError(error);
 		} finally {
@@ -64,5 +66,6 @@ export const useTodos = (initialState = []) => {
 		createTodo,
 		updateTodo,
 		deleteTodo,
+		setTodos,
 	};
 };

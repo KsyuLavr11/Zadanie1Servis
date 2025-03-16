@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import styles from '../../App.module.css';
 
-export const FilterTodos = () => {
+export const FilterTodos = (todos) => {
 	const [searchTerm, setSearchTerm] = useState(''); //хранение поискового запроса
-	const [searchResults, setSearchResults] = useState([]); //результат поиска*/
+	const [searchResults, setSearchResults] = useState('');
 
-	useEffect((todos, searchTerm) => {
+	useEffect(() => {
 		if (searchTerm) {
 			const results = todos.filter((todo) =>
 				todo.title.toLowerCase().includes(searchTerm.toLowerCase()),
@@ -14,16 +14,16 @@ export const FilterTodos = () => {
 		} else {
 			setSearchResults([]);
 		}
-	}, []);
+	}, [todos, searchTerm]);
 
 	return (
-		<div className={styles['search-container']}>
+		<div className={styles['search-container  ']}>
 			<input
 				className={styles.input}
 				type="text"
 				name="text"
 				placeholder="Ведите текст для поиска"
-				onChange={() => {}}
+				onChange={(event) => setSearchTerm(event.target.value)}
 			/>
 			{searchTerm && (
 				<div className={styles['search-results']}>

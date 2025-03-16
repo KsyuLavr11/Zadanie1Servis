@@ -9,7 +9,9 @@ export const todosAPI = {
 		if (!response.ok) {
 			throw new Error('Ошибка при выполнении запроса');
 		}
-		return await response.json();
+		const data = await response.json();
+		console.log('dataReadALL', data);
+		return data;
 	},
 	create: async (newTodos) => {
 		const response = await fetch(BASE_URL + TODOS_ENDPOINT, {
