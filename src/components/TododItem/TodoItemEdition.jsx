@@ -1,30 +1,17 @@
 import { useState } from 'react';
 import styles from '../../App.module.css';
 
-export const TodoItemEdition = ({ updateTodo, todo, handlerIsDeleteTodo }) => {
+export const TodoItemEdition = ({ updateTodo, todo, deleteTodo }) => {
 	const [isEditing, seIsEditing] = useState(false);
 	const [editTitle, setEditTitle] = useState(todo.title);
 
-	const handleStartEdit = () => {
-		seIsEditing(true);
-	};
-
-	const handleCancelEdit = () => {
-		seIsEditing(false);
-		setEditTitle(todo.title);
-	};
-
 	const handleSaveEdit = () => {
 		updateTodo(todo.id, editTitle);
-		setEditTitle(false);
-	};
-
-	const handleDelete = () => {
-		handlerIsDeleteTodo(todo.id);
+		seIsEditing(false);
 	};
 
 	return (
-		<li>
+		<>
 			{isEditing ? (
 				<>
 					<input
@@ -35,32 +22,33 @@ export const TodoItemEdition = ({ updateTodo, todo, handlerIsDeleteTodo }) => {
 					/>
 					<button
 						className={styles['button-todos-cancel']}
-						onClick={handleCancelEdit}
+						onClick={() => seIsEditing(false)}
 					>
 						Отменить
 					</button>
 
 					<button
 						className={styles['button-todos-save']}
-						onClick={() => handleSaveEdit(todo.id)}
+						onClick={() => seIsEditing(todo.id)}
 					>
 						Сохранить
 					</button>
 				</>
 			) : (
 				<>
+					{todo.title}
 					<button
-						onClick={handleDelete}
+						onClick={() => deleteTodo(todo.id)}
 						className={styles['button-todos-delete']}
 					>
 						Удалить дело
 					</button>
 
-					<button onClick={handleStartEdit} className={styles['button-todos']}>
+					<button onClick={handleSaveEdit} className={styles['button-todos']}>
 						Изменить дело
 					</button>
 				</>
 			)}
-		</li>
+		</>
 	);
 };

@@ -9,9 +9,7 @@ export const todosAPI = {
 		if (!response.ok) {
 			throw new Error('Ошибка при выполнении запроса');
 		}
-		const data = await response.json();
-		console.log('dataReadALL', data);
-		return data;
+		return await response.json();
 	},
 	create: async (newTodos) => {
 		const response = await fetch(BASE_URL + TODOS_ENDPOINT, {
@@ -46,5 +44,6 @@ export const todosAPI = {
 		if (!response.ok) {
 			throw new Error('Ошибка при удалении задачи');
 		}
+		return;
 	},
 };

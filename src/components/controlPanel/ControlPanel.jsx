@@ -1,35 +1,28 @@
 import { useState } from 'react';
 import styles from '../../App.module.css';
-import { sortTodos } from '../helpers/sortTodos';
 
-export const ControlPanel = ({ createTodo, todos, setTodos, isLoading }) => {
-	const [newTodo, setNewTodo] = useState('');
-	const [isSorted, setIsSorted] = useState(false);
+export const ControlPanel = ({ createTodo, isLoading, isSort, setIsSorted }) => {
+	const [title, setTitle] = useState('');
 
 	const handleAddTodo = () => {
-		if (newTodo.trim()) {
-			createTodo(newTodo);
+		if (title.trim()) {
+			createTodo(title);
 		}
-	};
-
-	const toggleSort = () => {
-		setIsSorted(isSorted);
-		setTodos(sortTodos(todos, !isSorted));
 	};
 
 	const handleSumbit = (event) => {
 		event.preventDefault();
-		if (newTodo.trim()) {
-			ondeviceorientationabsolute({ newTodo });
-			setNewTodo('');
+		if (title.trim()) {
+			createTodo({ title });
+			setTitle('');
 		}
 	};
 
 	return (
 		<>
 			<div>
-				<button className={styles['sort-button']} onClick={toggleSort}>
-					{isSorted ? 'Отмена сортировки' : 'Сортировать по алфавиту'}
+				<button className={styles['sort-button']} onClick={setIsSorted}>
+					{isSort ? 'Отмена сортировки' : 'Сортировать по алфавиту'}
 				</button>
 			</div>
 			{isLoading && <div className={styles.loader}>Загрузка...</div>}
@@ -39,9 +32,9 @@ export const ControlPanel = ({ createTodo, todos, setTodos, isLoading }) => {
 						className={styles.input}
 						type="text"
 						name="text"
-						value={newTodo}
+						value={title}
 						placeholder="Ведите название дела"
-						onChange={(event) => setNewTodo(event.target.value)}
+						onChange={(event) => setTitle(event.target.value)}
 					/>
 					<button
 						disabled={isLoading}

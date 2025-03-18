@@ -1,10 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { todosAPI } from '../api/todosAPI';
+import { filterTodos } from '../components/helpers/filterTodos';
+import { sortTodos } from '../components/helpers/sortTodos';
 
 export const useTodos = () => {
 	const [todos, setTodos] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState(null);
+
+	const [searchTerm, setSearchTerm] = useState('');
+	const [isSort, setIsSort] = useState(false);
+
+	useEffect(() => {
+		readTodos();
+	}, []);
 
 	const readTodos = async () => {
 		setIsLoading(true);
@@ -58,14 +67,18 @@ export const useTodos = () => {
 		}
 	};
 
+	const filtredTodos = searchTerm ? filterTodos(todos, searchTerm) : todos;
+	const sortedTodos = isSort ? sortTodos(filtredTodos) : filtredTodos;
+
 	return {
-		todos,
+		todos: sortedTodos,
 		isLoading,
 		error,
-		readTodos,
 		createTodo,
 		updateTodo,
 		deleteTodo,
-		setTodos,
+		setSearchTerm,
+		isSort,
+		setIsSort,
 	};
 };
